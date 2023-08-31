@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const { schema } = require('./productModel')
+const bcrypt = require('bcrypt')
 
 const Schema = mongoose.Schema
 
@@ -10,4 +12,9 @@ const clientSchema = new Schema({
     cep: { type: Number, required: true },
     password: { type: String, required: true }
 })
+clientSchema.pre("save",async function(next){
+    this.password = await bcrypt.hash(this.password,10);
+    next();
+})
+
 module.exports = mongoose.model("ClientModel", clientSchema)
