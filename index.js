@@ -30,6 +30,8 @@ app.use(employeeRouter)
 app.use(authRouter)
 
 
+
+
 app.listen(port, () => {
     console.log(`O servidor está executando na porta ${port}`)
 })

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
-
+const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema
 
-const employeeModel = new Schema({
+const employeeShema = new Schema({
     name: { type: String, required: true },
     cpf: { type: String, required: true, unique: true },
     email: { type: String, required: true },
@@ -10,4 +10,8 @@ const employeeModel = new Schema({
     cep: { type: Number, required: true },
     password: { type: String, required: true }
 })
-module.exports = mongoose.model("EmployeeeModel", employeeModel)
+employeeShema.pre("save",async function(next){
+    this.password = await bcrypt.hash(this.password,10);
+    next();
+})
+module.exports = mongoose.model("EmployeeModel", employeeShema)

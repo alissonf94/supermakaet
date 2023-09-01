@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { schema } = require('./productModel')
 const bcrypt = require('bcrypt')
 
 const Schema = mongoose.Schema
