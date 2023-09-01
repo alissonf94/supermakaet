@@ -19,6 +19,7 @@ const port = process.env.port || 3000
 const productRouter = require('./src/routers/productRouter')
 const clientRouter =require('./src/routers/clientRouter')
 const employeeRouter = require("./src/routers/employeeRouter")
+const buyRouter = require("./src/routers/buyRouter")
 const authRouter = require("./src/routers/authRouter")
 
 //Define tudo o que será usado na nossa aplicação.
@@ -28,6 +29,7 @@ app.use(productRouter)
 app.use(clientRouter)
 app.use(employeeRouter)
 app.use(authRouter)
+app.use(buyRouter)
 
 
 

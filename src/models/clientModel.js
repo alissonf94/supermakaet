@@ -9,7 +9,7 @@ const clientSchema = new Schema({
     email: { type: String, required: true },
     bday: { type: String, required: true },
     cep: { type: Number, required: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
 })
 clientSchema.pre("save",async function(next){
     this.password = await bcrypt.hash(this.password,10);

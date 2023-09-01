@@ -45,9 +45,13 @@ function authMiddllwares (req, res, next){
             if(req.url == "/api/products" && req.method == "GET"){
                 return next()
             }
+            else if(req.url == "/api/buys"){
+                return next()
+            }
             else if(!(req.url == "/api/client")){
                 return res.status(403).send({ message: "not authorized" });
             } 
+            
         }
         else{
             const user = await employeeModel.findById(decoded.userLogin.id)
