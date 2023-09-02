@@ -12,6 +12,7 @@ module.exports = {
             await Promise.all(products.map(async productId =>{
                 const product = await productModel.findById({ _id: productId.productId })
                 valueBuy += product.price
+                
                 if(!product){
                     res.status(402).send({message:"Product not found"})
                 }
@@ -21,17 +22,21 @@ module.exports = {
                 buy.products.push(buyProduct)
             }))
 
+            //atribuição do preço
             buy.valueBuy = valueBuy
+            
             await buy.save()
             res.status(201).send({message:"Compra adicionada"})
 
-        } catch (err){
+        } 
+        catch (err){
             res.status(500).send(err)
         }
     },
+    
     getBuy: async(req,res)=>{
         try {
-            const buys =  await BuyModel.find({}).populate('products').populate('client')
+            const buys =  await BuyModel.find({}).populate('products')
             return res.status(200).json({buys})
         } catch (error) {
             return res.status(400).send({error: "Erro loading projects"})

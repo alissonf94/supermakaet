@@ -43,8 +43,9 @@ module.exports = {
             /**
              * Mesma lógica do caso anterior só que aqui nós temos uma response que deu errado
              */
-            res.status(500).json({ message: `Não foi possível adicionar o produto ${req.body.product}` })
-
+            
+            res.status(500).send(err)
+            
         }
     }
 }

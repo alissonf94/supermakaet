@@ -10,8 +10,11 @@ module.exports = {
             if(req.body.userType == "client"){
                 user = await clientModel.findOne({ cpf:req.body.cpf  })
             }
-            else{
+            else if(req.body.userType == "employee"){
                 user = await employeeModel.findOne({cpf: req.body.cpf})
+            }
+            else{
+                return res.status(402).send({message: "User not found"})
             }
 
             if(!user){
