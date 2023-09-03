@@ -2,9 +2,7 @@
 const express = require('express')
 const clientRouter = express.Router()
 const clientController = require('../controllers/clientController')
-const authMiddllware = require("../middllewares/auth.middlleware")
 
-clientRouter.use(authMiddllware)
 
 clientRouter.route('/api/clients')
     .get((req, res) => clientController.getClients(req, res))

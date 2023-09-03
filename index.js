@@ -22,10 +22,14 @@ const employeeRouter = require("./src/routers/employeeRouter")
 const buyRouter = require("./src/routers/buyRouter")
 const authRouter = require("./src/routers/authRouter")
 const promotionRouter = require("./src/routers/promotionRouter")
+const authMiddlware = require("./src/middlewares/auth.middleware")
+
 
 //Define tudo o que será usado na nossa aplicação.
 //Perceba que os roteadores precisam ser declarados como use para poderem de fato serem usados pela nossa app
 app.use(express.json())
+
+app.use(authMiddlware)
 app.use(clientRouter)
 app.use(productRouter)
 app.use(employeeRouter)

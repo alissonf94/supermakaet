@@ -7,7 +7,7 @@ productRouter.route('/api/products')
 .get((req, res) => productController.getProducts(req, res))
 .post((req, res) => productController.createProduct(req, res))
 .put((req, res) => productController.updateProduct(req, res))
-productRouter.route('/api/products/:id')
+productRouter.route('/api/product/:id')
 .get((req, res) => productController.getProduct(req, res))
 .delete((req, res) => productController.deleteProductByName(req, res))
 

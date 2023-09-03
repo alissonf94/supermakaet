@@ -48,6 +48,9 @@ function authMiddllwares (req, res, next){
             else if(req.url == "/api/buys"){
                 return next()
             }
+            else if(req.url == "/api/promotion" && req.method == "GET"){
+                return next();
+            }
             else if(!(req.url == "/api/client")){
                 return res.status(403).send({ message: "not authorized" });
             } 
