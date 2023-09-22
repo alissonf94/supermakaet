@@ -1,5 +1,5 @@
 const BuyModel = require("../models/BuyModel")
-const productModel = require("../models/productModel")
+const productModel = require("../models/ProductModel")
 
 
 module.exports = {

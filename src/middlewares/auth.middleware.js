@@ -1,7 +1,7 @@
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
-const model = require("../models/clientModel")
-const employeeModel = require("../models/employeeModel")
+const model = require("../models/ClientModel")
+const employeeModel = require("../models/EmployeeModel")
 
 function authMiddllwares (req, res, next){
     if(req.url == "/api/clients" && req.method == "POST"){

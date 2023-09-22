@@ -1,4 +1,4 @@
-const EmployeeModel = require('../models/employeeModel')
+const EmployeeModel = require('../models/EmployeeModel')
 
 module.exports = {
     getEmployees: (req, res) => {
@@ -39,7 +39,7 @@ module.exports = {
             const result = await EmployeeModel.create(req.body)
             res.status(201).json({ message: `O funcionario ${result._doc.name} foi adicionado com sucesso!` })
         } catch (err) {
-            res.status(500).json({ message: `Não foi possível adicionar o funcionario ${req.body.employee}` })
+            res.status(500).json({ message: err.message })
 
         }
     }

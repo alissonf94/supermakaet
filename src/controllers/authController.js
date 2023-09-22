@@ -1,7 +1,7 @@
-const clientModel = require("../models/clientModel")
+const clientModel = require("../models/ClientModel")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const employeeModel = require("../models/employeeModel")
+const employeeModel = require("../models/EmployeeModel")
 
 module.exports = {
     login: async (req, res) =>{

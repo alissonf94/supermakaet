@@ -1,46 +1,32 @@
-const ClientModel = require('../models/clientModel')
+const ClientModel = require('../models/ClientModel')
+const clientService = require("../services/ClientService")
 
 module.exports = {
-    getClients: (req, res) => {
-        ClientModel
-            .find({}).select(["-__v", "-_id"]).then((result) => {
-                res.status(200).json(result)
-            }).catch(() => {
-                res.status(500).json({ message: "Não foi possivel recupera os clientes" })
-            })
+    getClients: async (req, res) => {
+        const clients = await clientService.findAllClientsService()
+        res.status(201).send(clients)
     },
-    deleteClientByMat: async (req, res) => {
-        try {
-            const result = await ClientModel.deleteOne({ _id: req.params.id })
-            res.status(200).send({ message: "Cliente removido com sucesso!" })
-        } catch (err) {
-            res.status(500).json({ message: "Não foi possível remover o cliente" })
-        }
+    deleteClientById: async (req, res) => {
+       const result = await clientService.deleteByIdClient(req.params.id)
+       res.status(200).send(result)
     },
     getClient: async (req, res) => {
-        try {
-            const result = await ClientModel.findById({ _id: req.params.id})
-            res.status(200).send(result)
-        }
-        catch (err) {
-            res.status(500).json({ message: "Não foi possivel retorna o cliente" })
-        }
+        const result = await clientService.findByIdClientService(req.params.id)
+        res.status(200).send(result)
     },
     updateClient: async (req, res) => {
-        try {
-            const result = await ClientModel.updateOne({ cpf: req.body.cpf }, req.body)
-            res.status(200).send({ message: "Cliente atualizado com sucesso!" })
-        } catch (err) {
-            res.status(500).json({ message: "Não foi possível atualizar os dados" })
-        }
+        
+        const clientId = req.params.id;
+        
+        const result = await clientService.updateClientService(clientId, req.body)
+        
+        res.status(201).send(result)
     },
     createClient: async (req, res) => {
-        try {
-            const result = await ClientModel.create(req.body)
-            res.status(201).json({ message: `O cliente ${result._doc.name} foi adicionado com sucesso!` })
-        } catch (err) {
-            res.status(500).json({ message: `Não foi possível adicionar o cliente ${req.body.client}` })
+        const {nameClient, cpf, email, password } = req.body
+            
+        const result = await clientService.createClientService({nameClient, cpf, email, password})
 
-        }
+        res.status(201).json({ message: `O cliente foi adicionado com sucesso!` })
     }
 }

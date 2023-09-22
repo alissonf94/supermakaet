@@ -1,6 +1,6 @@
 const express = require('express')
 const promotionRouter = express.Router()
-const promotionController = require("../controllers/promotionController")
+const promotionController = require("../controllers/PromotionController")
 
 promotionRouter.route('/api/promotions').post((req, res) => promotionController.createPromoyion(req, res))
 .get((req,res) => promotionController.getPromotions(req,res))

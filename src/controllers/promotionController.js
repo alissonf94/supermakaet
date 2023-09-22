@@ -1,7 +1,7 @@
-const productModel = require('../models/productModel')
+const productModel = require('../models/ProductModel')
 const buyModel = require('../models/BuyModel')
-const clientModel = require("../models/clientModel")
-const promotionModel = require("../models/promotionModel")
+const clientModel = require("../models/ClientModel")
+const promotionModel = require("../models/PromotionModel")
 const { map } = require('lodash')
 
 module.exports = {

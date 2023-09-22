@@ -1,7 +1,7 @@
 'use strict'
 const express = require('express')
 const productRouter = express.Router()
-const productController = require('../controllers/productController')
+const productController = require('../controllers/ProductController')
 
 productRouter.route('/api/products')
 .get((req, res) => productController.getProducts(req, res))
