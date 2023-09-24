@@ -5,12 +5,12 @@ const clientController = require('../controllers/ClientController')
 
 
 clientRouter.route('/api/clients')
-    .get((req, res) => clientController.getClients(req, res))
-    .post((req, res) => clientController.createClient(req, res))
+    .get((req, res) => clientController.findAllClientsController(req, res))
+    .post((req, res) => clientController.createClientController(req, res))
 
 clientRouter.route('/api/client/:id')
-    .put((req, res) => clientController.updateClient(req, res))
-    .get((req, res) => clientController.getClient(req, res))
-    .delete((req, res) => clientController.deleteClientById(req, res))
+    .put((req, res) => clientController.updateByIdClientController(req, res))
+    .get((req, res) => clientController.findByIdClientController(req, res))
+    .delete((req, res) => clientController.deleteByIdClientController(req, res))
 
 module.exports = clientRouter

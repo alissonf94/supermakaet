@@ -1,46 +1,45 @@
-const EmployeeModel = require('../models/EmployeeModel')
+const EmployeeModel = require('../models/EmployeeModel');
+const employeeRouter = require('../routers/EmployeeRouter');
+const EmployeeService = require('../services/EmployeeService')
+
+async function createEmployeeController(req, res){
+    const {nameEmployee, cpf, email, password } = req.body
+    const result = await EmployeeService.createEmployeeService({nameEmployee, cpf, email, password})
+
+    res.status(201).json({ message: 'O funcionario foi adicionado com sucesso!' })    
+}
+
+async function updateByIdEmployeeController(req, res){
+    const employeeId = req.params.id;      
+    const result = await EmployeeService.updateByIdEmployeeService(employeeId, req.body)
+    
+    res.status(201).send(result)
+}
+
+async function findAllEmployeeController(req, res){
+    const result = await EmployeeService.findAllEmployeeService()
+       
+    res.status(200).send(result)
+}
+
+async function findByIdEmployeeController(req, res){
+    const employeeId = req.params.id
+    const result = await EmployeeService.findByIdEmployeeService(employeeId)
+        
+    res.status(200).send(result)
+}
+
+async function deleteByIdEmployeeController(req, res){
+    const employeeId = req.params.id;
+    const result = await EmployeeService.deleteByIdEmployeeService(employeeId)
+
+    res.status(200).send(result)
+}
 
 module.exports = {
-    getEmployees: (req, res) => {
-        EmployeeModel
-            .find({}).select(["-__v", "-_id"]).then((result) => {
-                res.status(200).json(result)
-            }).catch(() => {
-                res.status(500).json({ message: "Não foi possivel recupera os funcionarios" })
-            })
-    },
-    deleteEmployeeByMat: async (req, res) => {
-        try {
-            const result = await EmployeeModel.deleteOne({ _id: req.params.id })
-            res.status(200).send({ message: "Funcionario removido com sucesso!" })
-        } catch (err) {
-            res.status(500).json({ message: "Não foi possível remover o funcionario" })
-        }
-    },
-    getEmployee: async (req, res) => {
-        try {
-            const result = await EmployeeModel.findById({ _id: req.params.id })
-            res.status(200).send(result)
-        }
-        catch (err) {
-            res.status(500).json({ message: "Não foi possivel retorna o funcionario" })
-        }
-    },
-    updateEmployee: async (req, res) => {
-        try {
-            const result = await EmployeeModel.updateOne({ cpf: req.body.cpf }, req.body)
-            res.status(200).send({ message: "Funcionario atualizado com sucesso!" })
-        } catch (err) {
-            res.status(500).json({ message: "Não foi possível atualizar os dados" })
-        }
-    },
-    createEmployee: async (req, res) => {
-        try {
-            const result = await EmployeeModel.create(req.body)
-            res.status(201).json({ message: `O funcionario ${result._doc.name} foi adicionado com sucesso!` })
-        } catch (err) {
-            res.status(500).json({ message: err.message })
-
-        }
-    }
+    createEmployeeController,
+    updateByIdEmployeeController,
+    findAllEmployeeController,
+    findByIdEmployeeController,
+    deleteByIdEmployeeController
 }

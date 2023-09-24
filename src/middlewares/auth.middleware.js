@@ -31,41 +31,18 @@ function authMiddllwares (req, res, next){
     if (!/^Bearer$/i.test(scheme))
         return res.status(401).send({ message: "Malformatted Token!" });
 
-    jwt.verify(token, process.env.SECRET, async (err, decoded)=>{
+    jwt.verify(token, process.env.SECRET, async (err, decoded)=>
+    {
         if(err){
             return res.status(401).send({ message: "Invalid token!" });
         }
-        if(decoded.userLogin.userType == "client"){
-            const user = await model.findById(decoded.userLogin.id);
-            req.userId = decoded.userLogin.id
-
-            if(!user || !user.id)
-                return res.status(401).send({ message: "Invalid token!" });
-
-            if(req.url == "/api/products" && req.method == "GET"){
-                return next()
-            }
-            else if(req.url == "/api/buys"){
-                return next()
-            }
-            else if(req.url == "/api/promotion" && req.method == "GET"){
-                return next();
-            }
-            else if(!(req.url == "/api/client")){
-                return res.status(403).send({ message: "not authorized" });
-            } 
-            
-        }
-        else{
-            const user = await employeeModel.findById(decoded.userLogin.id)
-            req.userId = decoded.userLogin.id
-
-            if(!user || !user.id)
-                return res.status(401).send({ message: "Invalid token!" });
-        }
         
+        req.userId = decoded.userLogin.id
+        req.typeUser = decoded.userLogin.userType
+    
         return next();
-    })
+    }
+    )
 }
 
 module.exports = authMiddllwares

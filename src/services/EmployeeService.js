@@ -1,89 +1,91 @@
-const clientRepositories =  require("../repositories/ClientRepositories")
+const employeeRepositories =  require("../repositories/EmployeeRepositories")
 const AppError = require('../errors/AppError')
 const bcrypt = require('bcrypt')
 
-async function createClientService({nameClient, cpf, email, password}) 
+async function createEmployeeService({nameEmployee, cpf, email, password}) 
 {
-    if(!nameClient || !email || !cpf || !password )
+    if(!nameEmployee || !email || !cpf || !password )
         throw new AppError('Submit all fields for registration', 400)
     
-    const foundUser = await clientRepositories.findByEmailClientRepository(email)
+    const foundEmployee = await employeeRepositories.findByEmailEmployeeRepository(email)
 
-    if(foundUser) throw new AppError('Client already exists', 409)
+    if(foundEmployee) throw new AppError('Employee already exists', 409)
          
-    await clientRepositories.createClientRepository(
+    await employeeRepositories.createEmployeeRepository(
     {
-        nameClient, 
+        nameEmployee, 
         cpf, 
         email, 
         password
     }
     )
+    return ({message: "Employee successfully create!"})
 }
-
-async function findByIdClientService(idClient)
-{
-    const client = await clientRepositories.findByIdClientReposytory(idClient)
     
-    if( client.cpf == undefined)
-        throw new AppError('Client not found',400)
-
-    return client
-}
-
-async function findAllClientsService()
+async function findByIdEmployeeService(employeeId)
 {
-    const clients = await clientRepositories.findAllClientRepository();
-
-    if(clients.length == 0)
-        throw new AppError('There are no clients', 400)
+    const employee = await employeeRepositories.findByIdEmployeeReposytory(employeeId)
     
-    return clients
+    if(!employee)
+        throw new AppError('Employee not found',400)
+
+    return employee
 }
 
-async function updateClientService( clientId, {nameClient, cpf, email, password})
+async function findAllEmployeeService()
+{
+    const employees = await employeeRepositories.findAllEmployeepository();
+    
+    if(employees.length == 0)
+        throw new AppError('There are no employee', 400)
+    
+    return employees
+}
+
+async function updateByIdEmployeeService( employeeId, {nameEmployee, cpf, email, password})
 {   
-    const clientAlreadyExisit = await clientRepositories.findByIdClientReposytory(clientId)
+    const employeeAlreadyExist = await employeeRepositories.findByIdEmployeeReposytory(employeeId)
 
-    if(!clientId && !nameClient && !password && !cpf && !email)
+    if(!employeeId && !nameEmployee && !password && !cpf && !email)
         throw new AppError('Submit all fields for registration', 400)
 
-    if(!clientAlreadyExisit){
-        throw new AppError('Client not found', 404)
+    if(!employeeAlreadyExist){
+        throw new AppError('Employee not found', 404)
     }
 
     password = await bcrypt.hash(password,10)
     
-    await clientRepositories.updateClientRepository(
-        clientId,   
-        nameClient, 
+    await employeeRepositories.updateByIdEmployeeRepository(
+        employeeId,   
+        nameEmployee, 
         cpf, 
         email, 
         password
     )
 
-    return {message: "Client successfully updated!" }
+    return {message: "Employee successfully updated!" }
 }
 
-async function deleteByIdClient (clientId){
-    const clientAlreadyExisit = await clientRepositories.findByIdClientReposytory(clientId)
+async function deleteByIdEmployeeService (employeeId){
+    const employeeAlreadyExist = await employeeRepositories.findByIdEmployeeReposytory(employeeId)
 
-    if(!clientId)
+    if(!employeeId)
         throw new AppError('Submit all fields for registration', 400)
 
-    if(!clientAlreadyExisit){
-        throw new AppError('Client not found', 404)
+    if(!employeeAlreadyExist){
+        throw new AppError('Employee not found', 404)
     }
 
-    await clientRepositories.deleteClientRepository(clientId)
+    await employeeRepositories.deleteByIdEmployeeRepository(employeeId)
 
-    return {message: 'Client successfully delete!'}
+    return {message: 'Employee successfully delete!'}
 }
 module.exports =
 {
-    createClientService, 
-    findByIdClientService, 
-    findAllClientsService,
-    updateClientService,
-    deleteByIdClient
+   createEmployeeService,
+   updateByIdEmployeeService,
+   findAllEmployeeService,
+   findByIdEmployeeService,
+   findAllEmployeeService,
+   deleteByIdEmployeeService
 }

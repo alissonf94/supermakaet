@@ -1,7 +1,7 @@
 const Employee = require("../models/EmployeeModel")
 
 
-const findByEmailEmailRepository = (email) =>
+const findByEmailEmployeeRepository = (email) =>
 { 
     return Employee.findOne({email: email})
 }
@@ -21,12 +21,12 @@ const findAllEmployeepository = () =>
     return Employee.find({}).select(["-__v", "-_id"]) 
 };
 
-const findByIdEmployeeReposytory = ( employeeId) => 
+const findByIdEmployeeReposytory = (employeeId) => 
 { 
-    return Employee.findById({_id : employeeId}) 
+    return Employee.findById({_id: employeeId}) 
 }
 
-const updateEmployeeRepository = ( employeeId, nameEmployee, cpf, email, password) => 
+const updateByIdEmployeeRepository = ( employeeId, nameEmployee, cpf, email, password) => 
 {
     return Employee.updateOne(
         {
@@ -40,16 +40,16 @@ const updateEmployeeRepository = ( employeeId, nameEmployee, cpf, email, passwor
         })
 }
 
-const deleteEmployeeRepository= (employeeId) =>
+const deleteByIdEmployeeRepository= (employeeId) =>
 {
    return Employee.deleteOne({_id: employeeId})
 }
 
 module.exports = {
-   deleteEmployeeRepository,
+   deleteByIdEmployeeRepository,
    findAllEmployeepository,
-   findByEmailEmailRepository,
+   findByEmailEmployeeRepository,
    findByIdEmployeeReposytory,
    createEmployeeRepository,
-   updateEmployeeRepository
+   updateByIdEmployeeRepository
 }

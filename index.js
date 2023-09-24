@@ -26,6 +26,7 @@ const employeeRouter = require("./src/routers/EmployeeRouter")
 const buyRouter = require("./src/routers/BuyRouter")
 const authRouter = require("./src/routers/AuthRouter")
 const promotionRouter = require("./src/routers/PromotionRouter")
+const shoppingCardRouter = require("./src/routers/ShoppingCardRouter")
 const authMiddlware = require("./src/middlewares/Auth.middleware")
 
 
@@ -40,6 +41,7 @@ app.use(employeeRouter)
 app.use(authRouter)
 app.use(buyRouter)
 app.use(promotionRouter)
+app.use(shoppingCardRouter)
 
 const erroHandling = async (err, req, res, next)=>
 {
