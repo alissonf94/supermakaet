@@ -7,7 +7,7 @@ function authMiddllwares (req, res, next){
     if(req.url == "/api/clients" && req.method == "POST"){
         return next();
     }
-    else if (req.url == "/api/auth/login"){
+    else if (req.url == "/login"){
         return next();
     }
     else if(req.url == "/api/employees" && req.method == "POST"){

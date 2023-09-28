@@ -23,7 +23,7 @@ const findAllClientRepository = () =>
 
 const findByIdClientReposytory = (idClient) => 
 { 
-    return Client.findById({_id : idClient}) 
+    return Client.findById({_id : idClient}) .populate('buys')
 }
 
 const updateClientRepository = (idClient, nameClient, cpf, email, password) => 
@@ -36,7 +36,7 @@ const updateClientRepository = (idClient, nameClient, cpf, email, password) =>
             nameClient,
             cpf,
             email,
-            password
+            password,
         })
 }
 
@@ -45,11 +45,25 @@ const deleteClientRepository= (clientId) =>
    return Client.deleteOne({_id: clientId})
 }
 
+const updateBuysByIdRepository= (clientId, buys) => {
+    return Client.findOneAndUpdate(
+        {
+            _id: clientId
+        },
+        {
+            buys: buys
+        },
+        {
+            new: true
+        })
+}
+
 module.exports = {
     findByEmailClientRepository,
     findByIdClientReposytory,
     findAllClientRepository,
     createClientRepository,
     updateClientRepository,
-    deleteClientRepository
+    deleteClientRepository,
+    updateBuysByIdRepository
 }

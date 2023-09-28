@@ -16,6 +16,7 @@ const promotionShema = new Schema({
         require: true
     
     },
+    
     valuePromotion:{
         type: Number
     }

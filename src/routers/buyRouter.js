@@ -4,6 +4,7 @@ const express = require('express')
 const buyRouter = express.Router()
 const buyController = require('../controllers/BuyController')
 
-buyRouter.route('/api/buys').post((req,res)=> buyController.createBuy(req,res)).get((req,res)=>buyController.getBuy(req,res))
+buyRouter.route('/api/buys').post((req,res)=> buyController.registerBuyController(req,res))
+
 
 module.exports = buyRouter

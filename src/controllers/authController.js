@@ -8,10 +8,10 @@ module.exports = {
         try {
             let user;
             if(req.body.userType == "client"){
-                user = await clientModel.findOne({ cpf:req.body.cpf  })
+                user = await clientModel.findOne({ email: req.body.email  })
             }
             else if(req.body.userType == "employee"){
-                user = await employeeModel.findOne({cpf: req.body.cpf})
+                user = await employeeModel.findOne({email: req.body.email})
             }
             else{
                 return res.status(402).send({message: "User not found"})
@@ -33,7 +33,7 @@ module.exports = {
             }
             
             const token = jwt.sign({userLogin},process.env.SECRET,{ expiresIn: 86400 })
-            res.status(200).send(token)
+            return res.status(200).json(token)
         } 
         
         catch (error) {

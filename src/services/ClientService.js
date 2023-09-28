@@ -10,7 +10,7 @@ async function createClientService({nameClient, cpf, email, password})
     
     const foundUser = await findByEmailClientService(email)
          
-    await clientRepositories.createClientRepository(
+    const client =  await clientRepositories.createClientRepository(
         {
             nameClient, 
             cpf, 
@@ -19,9 +19,10 @@ async function createClientService({nameClient, cpf, email, password})
         }
     )
 
-   await shoppingCardService.createShoppingCard(email)
+    const clientId = client._id
+    await shoppingCardService.createShoppingCard(clientId)
 
-   return ({message: 'Client successfully create!'})
+    return ({message: 'Client successfully create!'})
 }
 
 async function findByIdClientService(idClient)
@@ -78,11 +79,21 @@ async function deleteByIdClientService (clientId){
 async function findByEmailClientService (email){
     const client = await clientRepositories.findByEmailClientRepository(email)
 
-    if(!client) throw new AppError('Client not found', 404)
+    if(client) throw new AppError('Client already exists', 400)
 
-    return client
+    return true
 }
+async function updateBuysByIdService(clientId, buys){
+    
+    const client = await clientRepositories.findByIdClientReposytory(clientId)
+    
+    if(!client)
+        throw new AppError('Client not found',400)
 
+    const clientUpadate = clientRepositories.updateBuysByIdRepository(clientId, buys)
+
+    return clientUpadate
+}
 module.exports =
 {
     createClientService, 
@@ -90,5 +101,6 @@ module.exports =
     findAllClientsService,
     findByEmailClientService,
     updateByIdClientService,
-    deleteByIdClientService
+    deleteByIdClientService,
+    updateBuysByIdService
 }

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
-
 const Schema =  mongoose.Schema
 
+
 const buySchema = new Schema({
-    products:[{
+    items:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ProductModel',
+        ref: 'ItemModel',
     }],
     
     client: {
@@ -18,4 +18,20 @@ const buySchema = new Schema({
         type: Number
     }
 })
+
+/*buySchema.pre('save', async function (next){
+    const client = await clienService.findByIdClientService(this.client)
+    
+    const buys = client.buys
+   
+    buys.push(this._id)
+    
+    client.set(buys)
+    
+    await client.save();
+
+    return next();
+});*/
+
 module.exports = mongoose.model("BuyModel",buySchema)
+

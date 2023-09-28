@@ -4,6 +4,7 @@ const clientService = require("../services/ClientService")
 async function createClientController(req, res){
     const {nameClient, cpf, email, password } = req.body
     const result = await clientService.createClientService({nameClient, cpf, email, password})
+    
     res.status(201).json({ message: `O cliente foi adicionado com sucesso!` })
 }
 

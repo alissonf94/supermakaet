@@ -19,7 +19,7 @@ const createProductRepository = ({nameProduct, typeProduct, price,description, v
 
 const findAllProductRepository = () =>
 { 
-    return Product.find({}).select(["-__v", "-_id"]) 
+    return Product.find({}).select(["-__v"]) 
 };
 
 const findByIdProductReposytory = (productId) => 

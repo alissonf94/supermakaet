@@ -2,18 +2,16 @@ const shoppingCartRepositories = require('../repositories/ShoppingCartRepositori
 const clientService = require('../services/ClientService')
 const productService = require('../services/ProductService')
 const itemService = require('../services/ItemService')
-const { AppError} = require("../errors/AppError")
+const AppError = require("../errors/AppError")
 
-async function createShoppingCard(clientEmail)
+async function createShoppingCard(clientId)
 {
-    const client = clientService.findByEmailClientService(clientEmail)
+    const id = clientId
     
-    const clientId = foundUser.id
-    
-    await shoppingCartRepositories.createShopping(clientId)
+    await shoppingCartRepositories.createShopping(id)
 }
 
-async function addItem(clientId, productId, quantity)
+async function addItemService(clientId, productId, quantity)
 {   
     if(!quantity){
         throw new AppError('Submit all fields for registration', 400)
@@ -30,7 +28,37 @@ async function addItem(clientId, productId, quantity)
     return ({message: "Product added to the cart successfully"})
 }
 
+async function deleteByIdItemShoppingCardService(itemId, clientId){
+    const shoppingCard =  await shoppingCartRepositories.findByClientIdShoppingCardRepository(clientId)
+    
+    const item = await itemService.findByIdItemService(itemId)
+    
+    const items = shoppingCard.items
+    shoppingCard.items = await removeItem(items, item)
+    
+    await shoppingCard.save()
+    await itemService.deleteByIdItemService(itemId)
+   
+    return ({message: "Item successfully deleted from cart."})
+}
+
+async function findByClientIdShoppingCardService(clientId){
+    return await shoppingCartRepositories.findByClientIdShoppingCardRepository(clientId)
+}
+
+function removeItem(items, item){
+    for( let i = 0; i < items.length; i++){
+        
+        if(items[0]._id.toHexString() == item._id){
+            items.splice(i,1)
+        }
+    }
+    return items
+}
+
 module.exports = {
     createShoppingCard,
-    addItem
+    addItemService,
+    deleteByIdItemShoppingCardService,
+    findByClientIdShoppingCardService
 }
