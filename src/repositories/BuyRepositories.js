@@ -12,7 +12,11 @@ const findByIdBuyRepository = (buyId) =>{
     return buy.findById(buyId).populate('items')
 }
 
+const findBuysByClientIdRepository = (clientId) =>{
+    return buy.find({client: clientId}).populate('items')
+}
 module.exports = {
     registerBuyRepository,
-    findByIdBuyRepository
+    findByIdBuyRepository,
+    findBuysByClientIdRepository
 }

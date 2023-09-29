@@ -7,6 +7,14 @@ async function registerBuyController (req, res){
     res.status(201).send(result)
 }
 
+async function findBuysByClientIdController(req, res){
+    const clientId = req.userId
+    const result = await BuyService.findBuysClientIdBuysServices(clientId)
+
+    return res.status(200).json(result)
+}
+
 module.exports = {
-   registerBuyController
+   registerBuyController,
+   findBuysByClientIdController
 }

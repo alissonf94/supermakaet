@@ -4,6 +4,6 @@ const authRouter = express.Router()
 const authController = require("../controllers/AuthController")
 
 authRouter.route("/login")
-.post((req,res)=> authController.login(req,res))
+.post((req,res)=> authController.loginController(req,res))
 
 module.exports = authRouter

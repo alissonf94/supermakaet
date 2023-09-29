@@ -38,7 +38,7 @@ function authMiddllwares (req, res, next){
         }
         
         req.userId = decoded.userLogin.id
-        req.typeUser = decoded.userLogin.userType
+        req.userType = decoded.userLogin.userType
     
         return next();
     }

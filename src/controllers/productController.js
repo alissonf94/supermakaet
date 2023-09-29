@@ -20,7 +20,7 @@ async function createProductController (req, res){
 async function findAllProductController (req, res){
     const result = await productService.findAllProductService()
 
-    res.status(200).send(result)
+    res.status(200).json(result)
 }
 
 async function findByIdProduct(req, res){

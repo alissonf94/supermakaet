@@ -25,8 +25,20 @@ const authRouter = require("./src/routers/AuthRouter")
 const promotionRouter = require("./src/routers/PromotionRouter")
 const shoppingCardRouter = require("./src/routers/ShoppingCardRouter")
 const authMiddlware = require("./src/middlewares/Auth.middleware")
-const errorHandling = require('./src/middlewares/ErrorHandling.midlleware')
+const  AppError = require("./src/errors/AppError")
 
+const erroHandling = async (err, req, res, next)=>
+{
+    if(err instanceof AppError){
+        return res.status(err.statusCode).json({
+          message: err.message
+        })
+    }
+
+    return  res.status(500).json({
+        message: err.message}
+    )
+}
 //Define tudo o que será usado na nossa aplicação.
 //Perceba que os roteadores precisam ser declarados como use para poderem de fato serem usados pela nossa app
 app.use(express.json())
@@ -39,7 +51,8 @@ app.use(authRouter)
 app.use(buyRouter)
 app.use(promotionRouter)
 app.use(shoppingCardRouter)
-app.use(errorHandling)
+app.use(erroHandling)
+
 
 app.listen(port, () => {
     console.log(`O servidor está executando na porta ${port}`)
@@ -51,3 +64,4 @@ const corsOptions = {
   };
 
 app.use(cors(corsOptions))
+

@@ -3,6 +3,7 @@ const ShoppingCardService = require("../services/ShoppingCardService")
 const itemService = require("../services/ItemService")
 const AppError = require("../errors/AppError")
 const clienService = require('../services/ClientService')
+
 async function registerBuyService(clientId){
     const shoppingCard = await ShoppingCardService.findByClientIdShoppingCardService(clientId)
     
@@ -65,8 +66,18 @@ async function updateStock (items){
     }
 }
 
+async function findBuysClientIdBuysServices(clientId){
+    const buys = await BuyRepositories.findBuysByClientIdRepository(clientId)
+
+    if(buys.length == 0){
+        throw new AppError('you have no buys', 404)
+    }
+
+    return buys
+}
 
 module.exports = {
     registerBuyService, 
-    findByIdBuyService
+    findByIdBuyService,
+    findBuysClientIdBuysServices
 }
