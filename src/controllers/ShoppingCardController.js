@@ -25,6 +25,7 @@ async function deleteByIdItemShoppingCardController(req, res)
 async function findByClientIdShoppingCardController(req, res){
     const clientId = req.userId
     const result = await shoppingCardService.findByClientIdShoppingCardService(clientId)
+    
     return res.status(200).json(result)
 }
 

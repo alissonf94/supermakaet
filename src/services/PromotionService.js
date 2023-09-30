@@ -1,13 +1,12 @@
 const promotionRepositories = require('../repositories/PromotionRepositories')
-const clientService = require('../services/ClientService')
+const userService = require ("../services/UserService")
 const productService = require('../services/ProductService')
-const buyService = require('../services/BuyService')
 const itemService = require("../services/ItemService")
 const { map } = require('lodash')
 const AppError = require('../errors/AppError')
 
 async function createPromotionService (clientId){
-    const client = await clientService.findByIdClientService(clientId)
+    const client = await userService.findByIdUsertService(clientId)
     
     const buys = client.buys
 

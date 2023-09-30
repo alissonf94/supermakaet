@@ -2,7 +2,7 @@ const BuyRepositories = require("../repositories/BuyRepositories")
 const ShoppingCardService = require("../services/ShoppingCardService")
 const itemService = require("../services/ItemService")
 const AppError = require("../errors/AppError")
-const clienService = require('../services/ClientService')
+const userService = require('../services/UserService')
 
 async function registerBuyService(clientId){
     const shoppingCard = await ShoppingCardService.findByClientIdShoppingCardService(clientId)
@@ -14,13 +14,13 @@ async function registerBuyService(clientId){
     
     let buy = await BuyRepositories.registerBuyRepository(clientId, items, valueBuy)
     
-    const client = await clienService.findByIdClientService(clientId)
+    const client = await userService.findByIdUsertService(clientId)
     
     const buys = client.buys
    
-    buys.push(buy)
+    buys.push(buys)
     
-    await clienService.updateBuysByIdService(clientId, buys)
+    await userService.updateBuysByIdService(clientId, buys)
     
     shoppingCard.items = []
     await shoppingCard.save()

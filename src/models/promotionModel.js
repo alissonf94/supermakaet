@@ -12,7 +12,7 @@ const promotionShema = new Schema({
     client: {
        
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ClientModel',
+        ref: 'UserModel',
         require: true
     
     },

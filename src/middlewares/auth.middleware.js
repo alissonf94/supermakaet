@@ -1,19 +1,24 @@
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
-const model = require("../models/ClientModel")
-const employeeModel = require("../models/EmployeeModel")
+
 
 function authMiddllwares (req, res, next){
     if(req.url == "/api/clients" && req.method == "POST"){
         return next();
     }
+    
     else if (req.url == "/login"){
         return next();
     }
+    
     else if(req.url == "/api/employees" && req.method == "POST"){
         return next();
     }
     
+    else if(req.url == "/api/products" && req.method == "GET"){
+        return next();
+    }
+
     const authHeader = req.headers.authorization;
     if(!authHeader){
         return res.status(401).send({ message: "The token was not informed!" });

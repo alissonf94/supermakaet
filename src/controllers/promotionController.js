@@ -1,6 +1,5 @@
 const productModel = require('../models/ProductModel')
 const buyModel = require('../models/BuyModel')
-const clientModel = require("../models/ClientModel")
 const promotionService = require('../services/PromotionService')
 const { map } = require('lodash')
 

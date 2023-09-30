@@ -1,39 +1,38 @@
-const EmployeeModel = require('../models/EmployeeModel');
-const employeeRouter = require('../routers/EmployeeRouter');
-const EmployeeService = require('../services/EmployeeService')
+const userService = require("../services/UserService")
 
 async function createEmployeeController(req, res){
-    const {nameEmployee, cpf, email, password } = req.body
-    const result = await EmployeeService.createEmployeeService({nameEmployee, cpf, email, password})
+    const {name, email, password } = req.body
+    const result = await userService.createUserService({name, email, password},"employee")
 
-    res.status(201).json({ message: 'O funcionario foi adicionado com sucesso!' })    
+    res.status(201).json(result)    
 }
 
 async function updateByIdEmployeeController(req, res){
-    const employeeId = req.params.id;      
-    const result = await EmployeeService.updateByIdEmployeeService(employeeId, req.body)
+    const employeeId = req.userId;   
+    const {name, email, password } = req.body  
+    const result = await userService.updateByIdUserService(employeeId,{name, email, password},"employee")
     
-    res.status(201).send(result)
+    res.status(201).json(result)
 }
 
 async function findAllEmployeeController(req, res){
-    const result = await EmployeeService.findAllEmployeeService()
+    const result = await userService.findAllUsersService()
        
-    res.status(200).send(result)
+    res.status(200).json(result)
 }
 
 async function findByIdEmployeeController(req, res){
     const employeeId = req.params.id
-    const result = await EmployeeService.findByIdEmployeeService(employeeId)
+    const result = await userService.findByIdUsertService(employeeId)
         
-    res.status(200).send(result)
+    res.status(200).json(result)
 }
 
 async function deleteByIdEmployeeController(req, res){
     const employeeId = req.params.id;
-    const result = await EmployeeService.deleteByIdEmployeeService(employeeId)
+    const result = await userService.deleteByIdUserService(employeeId)
 
-    res.status(200).send(result)
+    res.status(200).json(result)
 }
 
 module.exports = {

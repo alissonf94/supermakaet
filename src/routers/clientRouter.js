@@ -9,8 +9,9 @@ clientRouter.route('/api/clients')
     .post((req, res) => clientController.createClientController(req, res))
 
 clientRouter.route('/api/client/:id')
-    .put((req, res) => clientController.updateByIdClientController(req, res))
     .get(verifyEmployee, (req, res) => clientController.findByIdClientController(req, res))
     .delete(verifyEmployee,(req, res) => clientController.deleteByIdClientController(req, res))
+
+clientRouter.route('/api/client').put((req, res) => clientController.updateByIdClientController(req, res))
 
 module.exports = clientRouter

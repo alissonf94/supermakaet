@@ -1,13 +1,9 @@
 const shoppingCartRepositories = require('../repositories/ShoppingCartRepositories')
-const clientService = require('../services/ClientService')
-const productService = require('../services/ProductService')
 const itemService = require('../services/ItemService')
 const AppError = require("../errors/AppError")
 
-async function createShoppingCard(clientId)
-{
-    const id = clientId
-    
+async function createShoppingCard(id)
+{ 
     await shoppingCartRepositories.createShopping(id)
 }
 
