@@ -1,41 +1,25 @@
-const productModel = require('../models/ProductModel')
-const buyModel = require('../models/BuyModel')
 const promotionService = require('../services/PromotionService')
-const { map } = require('lodash')
 
-async function createPromotioControlller (req, res){
-    const clientId = req.params.id
-    
-    const result =  await promotionService.createPromotionService(clientId)
+async function createPromotionController(req,res){
+    const {nameProduct, valueProduct} = req.body
+    const result = await promotionService.createPromotionService(nameProduct, valueProduct)
 
-    res.status(201).send(result)
+    res.status(201).json(result)
 }
 
-async function findAllPromotionsController(req, res){
-    const result = await promotionService.findAllPromotionService()
-    
-    res.status(200).sen(result)
-}
-
-async function findByClientIdPromotionController (req, res){
-    const clientId = req.userId
-    
-    const result = await promotionService.findByClientIdPromotionService(clientId)
-
-    res.status(200).send(result)
+async function findAllPromotionsControlle (req, res){
+    const result = await promotionService.findAllPromotionsService()
+    res.status(200).json(result)
 }
 
 async function deleteByIdPromotionController(req, res){
-    const clientId = req.params.id
-    const result = promotionService.deleteByIdPromotionService(clientId)
-    res.status(200).send(result)
-}
+    const productId = req.params.id
+    const result = await promotionService.deleteByIdService(productId)
 
+    res.status(200).json(result)
+}
 module.exports = {
-    createPromotioControlller,
-    deleteByIdPromotionController,
-    findAllPromotionsController,
-    findByClientIdPromotionController   
+    createPromotionController,
+    findAllPromotionsControlle,
+    deleteByIdPromotionController
 }
-
-

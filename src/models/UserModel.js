@@ -27,16 +27,6 @@ const userShema = new Schema({
         type: String,
         required: true
     },
-    
-    buys:
-    [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'BuyModel',
-            require: false
-        }
-    ],
-
 })
 
 userShema.pre("save", async function(next){

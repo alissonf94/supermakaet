@@ -1,5 +1,5 @@
 const shoppingCartRepositories = require('../repositories/ShoppingCartRepositories')
-const itemService = require('../services/ItemService')
+const itemService = require('./ItemService')
 const AppError = require("../errors/AppError")
 
 async function createShoppingCard(id)

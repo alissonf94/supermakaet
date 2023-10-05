@@ -22,8 +22,9 @@ const clientRouter =require('./src/routers/ClientRouter')
 const employeeRouter = require("./src/routers/EmployeeRouter")
 const buyRouter = require("./src/routers/BuyRouter")
 const authRouter = require("./src/routers/AuthRouter")
-const promotionRouter = require("./src/routers/PromotionRouter")
+const productTips = require("./src/routers/ProductTipsRouter")
 const shoppingCardRouter = require("./src/routers/ShoppingCardRouter")
+const promotionRouter = require('./src/routers/PromotionRouter')
 const authMiddlware = require("./src/middlewares/Auth.middleware")
 const  AppError = require("./src/errors/AppError")
 
@@ -49,19 +50,20 @@ app.use(productRouter)
 app.use(employeeRouter)
 app.use(authRouter)
 app.use(buyRouter)
-app.use(promotionRouter)
+app.use(productTips)
 app.use(shoppingCardRouter)
+app.use(promotionRouter)
 app.use(erroHandling)
-
 
 app.listen(port, () => {
     console.log(`O servidor está executando na porta ${port}`)
 })
+
 const corsOptions = {
     origin: 'http://localhost:3000', // Permitir solicitudes solo desde este dominio
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     optionsSuccessStatus: 204, // Devuelve un estado 204 No Content para las opciones de CORS
-  };
+};
 
 app.use(cors(corsOptions))
 

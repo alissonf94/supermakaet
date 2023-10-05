@@ -14,17 +14,6 @@ async function registerBuyService(clientId){
     
     let buy = await BuyRepositories.registerBuyRepository(clientId, items, valueBuy)
     
-    const client = await userService.findByIdUsertService(clientId)
-    
-    const buys = client.buys
-   
-    buys.push(buys)
-    
-    await userService.updateBuysByIdService(clientId, buys)
-    
-    shoppingCard.items = []
-    await shoppingCard.save()
-    
     return ({message: "Buy successfully register!"})
 }
 
@@ -67,11 +56,9 @@ async function updateStock (items){
 }
 
 async function findBuysClientIdBuysServices(clientId){
-    const buys = await BuyRepositories.findBuysByClientIdRepository(clientId)
-
-    if(buys.length == 0){
-        throw new AppError('you have no buys', 404)
-    }
+    const buys = await BuyRepositories.
+    
+    findBuysByClientIdRepository(clientId)
 
     return buys
 }

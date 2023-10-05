@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const Schema = mongoose.Schema
 
 const promotionShema = new Schema({
@@ -7,18 +6,6 @@ const promotionShema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ProductModel',
         require:true
-    },
-
-    client: {
-       
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'UserModel',
-        require: true
-    
-    },
-    
-    valuePromotion:{
-        type: Number
     }
 })
 

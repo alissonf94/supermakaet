@@ -19,7 +19,7 @@ const jwt = require('jsonwebtoken')
     
     const token = jwt.sign({userLogin},process.env.SECRET,{ expiresIn: 86400 })
     
-    return token 
+    return {token, type: userLogin.userType} 
 }
 
 function valididyPassword (passwordLogin, passwordUser){

@@ -1,32 +1,32 @@
-const promotion = require("../models/PromotionModel")
+const promotion = require('../models/PromotionModel')
 
-const createPromotionRepository = (productId, clientId, valuePromotion) =>
-{
-    promotion.create(
+const createPromotionRepository = (productId) => {
+    return promotion.create(
         {
-            product: productId,
-            client: clientId,
-            valuePromotion: valuePromotion
+            product: productId
         }
     )
 }
 
-const findAllPromotionRepository = ()=>
-{
-    return promotion.find({})
+const findAllPromotionsRepository = ()=>{
+    return promotion.find({}).populate('product')
 }
 
-const findByClientIdPromotionRepository = (clientId)=>{
-    return promotion.find({client: clientId})
+const findByProductPromotion = (productId)=>{
+    return promotion.findOne(
+        {
+            product: productId
+        }
+    )
 }
 
-const deleteByIdPromotionRepository =  (id) => {
-    return promotion.deleteOne({_id: id})
+const deleteFindByIdRepository = (promotionId)=>{
+    return promotion.deleteOne({_id: promotionId})
 }
 
 module.exports = {
     createPromotionRepository,
-    findAllPromotionRepository,
-    findByClientIdPromotionRepository,
-    deleteByIdPromotionRepository
+    findAllPromotionsRepository,
+    findByProductPromotion,
+    deleteFindByIdRepository
 }

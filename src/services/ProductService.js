@@ -83,11 +83,15 @@ async function deleteByIdProductService (productId){
     return {message: 'Product successfully delete!'}
 }
 
+async function findByNameProductService(productName){
+    return await productRepositories.findByNameProductRepository(productName)
+}
 module.exports =
 {
   createProductService,
   updateProductService,
   findAllProductService,
   findByIdProductService,
+  findByNameProductService,
   deleteByIdProductService
 }
