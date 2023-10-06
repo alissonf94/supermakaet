@@ -14,6 +14,10 @@ async function registerBuyService(clientId){
     
     let buy = await BuyRepositories.registerBuyRepository(clientId, items, valueBuy)
     
+    shoppingCard.items = []
+    
+    await shoppingCard.save()
+    
     return ({message: "Buy successfully register!"})
 }
 

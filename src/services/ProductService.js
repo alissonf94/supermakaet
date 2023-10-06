@@ -9,8 +9,9 @@ async function createProductService({nameProduct, typeProduct, price,description
     
     const foundProduct = await productRepositories.findByNameProductRepository(nameProduct)
 
-    if(foundProduct) throw new AppError('Product already exists', 409)
-         
+    if(foundProduct){
+        throw new AppError('Product already exists', 409)
+    }
     await productRepositories.createProductRepository(
     {
         nameProduct: nameProduct, 
@@ -37,9 +38,6 @@ async function findByIdProductService(productId)
 async function findAllProductService()
 {
     const products = await productRepositories.findAllProductRepository();
-    
-    if(products.length == 0)
-        throw new AppError('There are no employee', 400)
     
     return products
 }
