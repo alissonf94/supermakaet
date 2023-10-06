@@ -12,7 +12,7 @@
 #### POST /login
 ##### -> Rota pertecente a autenticação do usuário
 ##### -> Será usado: email e password
-<img src="/public/Auth/login.png">
+<img src="/public/auth/login.png">
 
 
 ### Employee
