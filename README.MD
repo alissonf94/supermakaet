@@ -125,7 +125,7 @@
 #### GET /api/shoppingCard
 ##### -> Rota pertecente a recuperação de um shoppingCard por id do client
 #### -> Essa rota necessita da autenticação do token como cliente 
-<img src="/public/promotion/getPromotions.png">
+<img src="/public/ShoppingCard/getShoppingCard.png">
 
 #### PUT /api/shoppingCard/:id/
 ##### -> Rota pertecente a adição de um item no carrinho do usuário
@@ -133,6 +133,13 @@
 #### -> Essa rota necessita da autenticação do token como client
 ##### -> ##### -> Será usado: quantity
 <img src="/public/ShoppingCard/addItem.png">
+
+#### DELETE /api/shoppingCard/:id/
+##### -> Rota pertecente a remoção de um item no carrinho do usuário
+##### -> É necessario informa o id do item pela url 
+#### -> Essa rota necessita da autenticação do token como client
+##### -> ##### -> Será usado: quantity
+<img src="/public/ShoppingCard/deleteShoppingCard.png">
 
 
 ### Buy
