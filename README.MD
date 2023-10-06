@@ -68,7 +68,7 @@
 ##### -> O id é capturado por meio do token
 #### -> Essa rota necessita da autenticação do token como funcionário ou cliente
 ##### -> Será usado: name, email, password
-<img src="/public/clientes/updateClient.png.png">
+<img src="/public/clientes/updateClient.png">
 
 
 ### Product
