@@ -23,7 +23,7 @@ async function createProductTipsService (clientId){
     
     await productTipsRepository.createProducTipsRepository(productId, clientId, valueProductTips)
 
-    return ({message: 'Promotion successfully create!'})
+    return ({message: 'ProducTips successfully create!'})
 }
 
  function getIdItems (buys){

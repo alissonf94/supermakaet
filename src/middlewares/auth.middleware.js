@@ -19,6 +19,10 @@ function authMiddllwares (req, res, next){
         return next();
     }
 
+    else if(req.url == "/api/promotions" && req.method == "GET"){
+        return next();
+    }
+    
     const authHeader = req.headers.authorization;
     if(!authHeader){
         return res.status(401).send({ message: "The token was not informed!" });

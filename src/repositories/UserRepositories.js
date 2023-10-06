@@ -22,7 +22,7 @@ const findAllUserRepository = () =>
 
 const findByIdUserRepository = (id) => 
 { 
-    return User.findById({_id : id}) .populate('buys')
+    return User.findById({_id : id}) 
 }
 
 const updateUserRepository = (id, name,  email, password, userRole) => 

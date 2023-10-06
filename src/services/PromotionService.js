@@ -12,7 +12,7 @@ async function createPromotionService (productName, valueProduct){
     const promotion = await promotionRepository.findByProductPromotion(product._id)
 
     if(promotion){
-        throw new AppError("Produc already exists", 400)
+        throw new AppError("The product is already on sale", 400)
     }
 
     product.price = valueProduct

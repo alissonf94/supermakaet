@@ -53,7 +53,13 @@ async function updateByIdUserService( userId, { name, email, password}, userRole
     
     const userAlreadyExisit = await findByIdUsertService(userId)
     
-    const verifyEmail = await findByEmailUserUpdateService(email,userId);
+    const user = await userRepositories.findByEmailUsertRepository(email)
+
+    if(user){
+        if(user._id != userId){
+            throw new AppError('User already exists', 400)
+        }
+    } 
     
     password = await bcrypt.hash(password,10)
     
@@ -84,17 +90,6 @@ async function findByEmailUserService (email){
 
     if(user) throw new AppError('User already exists', 400)
 
-    return true
-}
-
-async function findByEmailUserUpdateService(email, id){
-    const user = await userRepositories.findByEmailUsertRepository(email)
-
-    if(user){
-        if(user._id != id){
-            throw new AppError('User already exists', 400)
-        }
-    } 
     return true
 }
 
