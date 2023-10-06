@@ -14,6 +14,7 @@
 ##### -> Será usado: email e password
 <img src="/public/Auth/login.png">
 
+
 ### Employee
 
 #### POST /api/employees
@@ -37,6 +38,7 @@
 #### -> Essa rota necessita da autenticação do token como funcionário
 ##### -> Será usado: name, email, password
 <img src="/public/employee/updateEmployee.png">
+
 
 ### Client
 
@@ -68,6 +70,7 @@
 ##### -> Será usado: name, email, password
 <img src="/public/clientes/updateClient.png.png">
 
+
 ### Product
 
 #### POST /api/products
@@ -96,6 +99,7 @@
 #### -> Essa rota necessita da autenticação do token como funcionário
 ##### -> ##### -> Será usado: nameProduct, typeProduct, price, description, validity, quantityProduct
 <img src="/public/product/updateProduct.png">
+
 
 ### Promotion
 
@@ -144,6 +148,7 @@
 ##### -> Rota pertecente a recuperação das compras  de um client específico
 #### -> Essa rota necessita da autenticação do token como client
 <img src="/public/buy/getBuys.png.png>
+
 
 ### ProducTips
 
